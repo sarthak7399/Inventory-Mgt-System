@@ -59,7 +59,16 @@ cd InventoryMgtSystem
 ### Run migrations
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
+```
+
+## Create a Superuser
+
+To access the Django admin panel and manage the ToDoListApplication, create a superuser account by running:
+
+```bash
+python manage.py createsuperuser
 ```
 
 ## Running the Application
@@ -69,3 +78,5 @@ To run the Django development server and access the ToDo app, execute the follow
 ```bash
 python manage.py runserver
 ```
+
+Open a web browser and navigate to http://127.0.0.1:8000/ to access the application.
