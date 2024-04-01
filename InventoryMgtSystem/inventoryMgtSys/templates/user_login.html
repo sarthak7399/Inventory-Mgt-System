@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-hWlIyL2p4im3eb6IzSk7jv89B0+80CrW4M1ougc1gTvpb/Hsww4fXb1Ck+zfy46AFuz+sqJOoKaAeojIMic3QQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Add styles here */
+    </style>
+</head>
+<body>
+    <div class="animation-bg"></div>
+    <div class="container">
+        <h3>Login</h3>
+        <form id="loginForm" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="id_username" name="username" class="form-control">
+                <!-- Add validation error message if any -->
+                {% if form.errors.username %}
+                    <small class="form-text text-danger">{{ form.errors.username }}</small>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="id_password" name="password" class="form-control">
+                <!-- Add validation error message if any -->
+                {% if form.errors.password %}
+                    <small class="form-text text-danger">{{ form.errors.password }}</small>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+
+    <!-- Client-side form validation -->
+    <script>
+        document.getElementById("loginForm").onsubmit = function() {
+            var username = document.getElementById("id_username").value;
+            var password = document.getElementById("id_password").value;
+
+            if (!username || !password) {
+                alert("Please enter both username and password");
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
