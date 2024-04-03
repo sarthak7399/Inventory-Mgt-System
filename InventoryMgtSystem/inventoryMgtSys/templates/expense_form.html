@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
-{% block title %}Counter Party{% endblock %}
+
 {% block content %}
 {% include 'navbar.html' %}
+
 <!-- Sidebar -->
       {% include 'sidebar.html' %}
-        <!-- Main content -->
+
+
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
-            <h2>Counter Party</h2>
-            <a class="btn btn-primary" href="{% url 'counterparty_add' %}">Add</a>
-            {% include 'counterparty_list.html' %}
+            <!-- expense_form.html -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
         </div>
       </main>
+
+
 {% endblock %}

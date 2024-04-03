@@ -1,17 +1,10 @@
-import os
 from pyexpat.errors import messages
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.forms import AuthenticationForm
-from passlib.hash import pbkdf2_sha256
 from django.contrib import messages
-from hashlib import pbkdf2_hmac
-import base64
 
 # Create your views here.
 
@@ -63,8 +56,6 @@ def logout_user(request):
 
 
 
-
-
 def UserRetrieveUpdateDestroy(request, pk):
     return render(request, 'user_detail.html')
 
@@ -100,26 +91,138 @@ def counterparty_delete(request, pk):
        return redirect('counterparty_list')
    return render(request, 'counterparty_confirm_delete.html', {'counterparty': counterparty})
 
-def InventoryListCreate(request):
-    return render(request, 'templates/inventory_list_create.html')
 
-def InventoryRetrieveUpdateDestroy(request, pk):
-    return render(request, 'templates/inventory_detail.html')
 
-def DealListCreate(request):
-    return render(request, 'templates/deal_list_create.html')
+def inventory_list(request):
+   inventories = Inventory.objects.all()
+   return render(request, 'inventory.html', {'inventories': inventories})
 
-def DealRetrieveUpdateDestroy(request, pk):
-    return render(request, 'templates/deal_detail.html')
+def inventory_add(request):
+   if request.method == 'POST':
+       form = InventoryForm(request.POST)
+       if form.is_valid():
+           form.save()
+           return redirect('inventory_list')
+   else:
+       form = InventoryForm()
+   return render(request, 'inventory_form.html', {'form': form})
 
-def ExpenseListCreate(request):
-    return render(request, 'templates/expense_list_create.html')
+def inventory_edit(request, pk):
+   inventory = get_object_or_404(Inventory, pk=pk)
+   if request.method == 'POST':
+       form = InventoryForm(request.POST, instance=inventory)
+       if form.is_valid():
+           form.save()
+           return redirect('inventory_list')
+   else:
+       form = InventoryForm(instance=inventory)
+   return render(request, 'inventory_form.html', {'form': form})
 
-def ExpenseRetrieveUpdateDestroy(request, pk):
-    return render(request, 'templates/expense_detail.html')
+def inventory_delete(request, pk):
+   inventory = get_object_or_404(Inventory, pk=pk)
+   if request.method == 'POST':
+       inventory.delete()
+       return redirect('inventory_list')
+   return render(request, 'inventory_confirm_delete.html', {'inventory': inventory})
 
-def IncomeListCreate(request):
-    return render(request, 'templates/income_list_create.html')
 
-def IncomeRetrieveUpdateDestroy(request, pk):
-    return render(request, 'templates/income_detail.html')
+
+def deal_list(request):
+    deals = Deal.objects.all()
+    return render(request, 'deal.html', {'deals': deals})
+
+def deal_add(request):
+    if request.method == 'POST':
+        form = DealForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('deal_list')
+    else:
+        form = DealForm()
+    return render(request, 'deal_form.html', {'form': form})
+
+def deal_edit(request, pk):
+    deal = get_object_or_404(Deal, pk=pk)
+    if request.method == 'POST':
+        form = DealForm(request.POST, instance=deal)
+        if form.is_valid():
+            form.save()
+            return redirect('deal_list')
+    else:
+        form = DealForm(instance=deal)
+    return render(request, 'deal_form.html', {'form': form})
+
+def deal_delete(request, pk):
+    deal = get_object_or_404(Deal, pk=pk)
+    if request.method == 'POST':
+        deal.delete()
+        return redirect('deal_list')
+    return render(request, 'deal_confirm_delete.html', {'deal': deal})
+
+
+
+def expense_list(request):
+   expenses = Expense.objects.all()
+   return render(request, 'expense.html', {'expenses': expenses})
+
+def expense_add(request):
+   if request.method == 'POST':
+       form = ExpenseForm(request.POST)
+       if form.is_valid():
+           form.save()
+           return redirect('expense_list')
+   else:
+       form = ExpenseForm()
+   return render(request, 'expense_form.html', {'form': form})
+
+def expense_edit(request, pk):
+   expense = get_object_or_404(Expense, pk=pk)
+   if request.method == 'POST':
+       form = ExpenseForm(request.POST, instance=expense)
+       if form.is_valid():
+           form.save()
+           return redirect('expense_list')
+   else:
+       form = ExpenseForm(instance=expense)
+   return render(request, 'expense_form.html', {'form': form})
+
+def expense_delete(request, pk):
+   expense = get_object_or_404(Expense, pk=pk)
+   if request.method == 'POST':
+       expense.delete()
+       return redirect('expense_list')
+   return render(request, 'expense_confirm_delete.html', {'expense': expense})
+
+
+
+def income_list(request):
+   incomes = Income.objects.all()
+   return render(request, 'income.html', {'incomes': incomes})
+
+def income_add(request):
+   if request.method == 'POST':
+       form = IncomeForm(request.POST)
+       if form.is_valid():
+           form.save()
+           return redirect('income_list')
+   else:
+       form = IncomeForm()
+   return render(request, 'income_form.html', {'form': form})
+
+def income_edit(request, pk):
+   income = get_object_or_404(Income, pk=pk)
+   if request.method == 'POST':
+       form = IncomeForm(request.POST, instance=income)
+       if form.is_valid():
+           form.save()
+           return redirect('income_list')
+   else:
+       form = IncomeForm(instance=income)
+   return render(request, 'income_form.html', {'form': form})
+
+def income_delete(request, pk):
+   income = get_object_or_404(Income, pk=pk)
+   if request.method == 'POST':
+       income.delete()
+       return redirect('income_list')
+   return render(request, 'income_confirm_delete.html', {'income': income})

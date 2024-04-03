@@ -11,12 +11,10 @@ class CustomUserCreationForm(UserCreationForm):
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
-        # Add your custom password validation logic here
         if len(password1) < 8:
             raise forms.ValidationError('Password must be at least 8 characters long.')
         if not any(char.isdigit() for char in password1):
             raise forms.ValidationError('Password must contain at least one digit.')
-        # ... add more validation rules as needed
         return password2
 
 
@@ -43,13 +41,38 @@ class CustomAuthenticationForm(AuthenticationForm):
         return self.cleaned_data
 
 
-
-# class LoginForm(forms.Form):
-#     username = forms.CharField(label='Username', max_length=100)
-#     password = forms.CharField(label='Password', widget=forms.PasswordInput)
-
-
 class CounterPartyForm(forms.ModelForm):
     class Meta:
         model = CounterParty
         fields = '__all__'
+        exclude = ['active']
+
+
+class InventoryForm(forms.ModelForm):
+   class Meta:
+       model = Inventory
+       fields = '__all__'
+
+
+class DealForm(forms.ModelForm):
+    class Meta:
+        model = Deal
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add widgets for the booking date and shipment date fields
+        self.fields['booking_date'].widget = forms.DateTimeInput(attrs={'type': 'datetime-local'})
+        self.fields['shipment_date'].widget = forms.DateTimeInput(attrs={'type': 'datetime-local'})
+
+
+class ExpenseForm(forms.ModelForm):
+   class Meta:
+       model = Expense
+       fields = '__all__'
+
+
+class IncomeForm(forms.ModelForm):
+   class Meta:
+       model = Income
+       fields = '__all__'

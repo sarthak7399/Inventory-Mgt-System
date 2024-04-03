@@ -20,18 +20,26 @@ urlpatterns = [
     path('counterparty/delete/<int:pk>/', views.counterparty_delete, name='counterparty_delete'),
 
     # Inventory Endpoints
-    path('inventories/', views.InventoryListCreate, name='inventory-list-create'),
-    path('inventories/<int:pk>/', views.InventoryRetrieveUpdateDestroy, name='inventory-detail'),
+    path('inventory/', views.inventory_list, name='inventory_list'),
+    path('inventory/add/', views.inventory_add, name='inventory_add'),
+    path('inventory/edit/<int:pk>/', views.inventory_edit, name='inventory_edit'),
+    path('inventory/delete/<int:pk>/', views.inventory_delete, name='inventory_delete'),
 
     # Deal Endpoints
-    path('deals/', views.DealListCreate, name='deal-list-create'),
-    path('deals/<int:pk>/', views.DealRetrieveUpdateDestroy, name='deal-detail'),
+    path('deals/', views.deal_list, name='deal_list'),
+    path('deals/add/', views.deal_add, name='deal_add'),
+    path('deals/edit/<int:pk>/', views.deal_edit, name='deal_edit'),
+    path('deals/delete/<int:pk>/', views.deal_delete, name='deal_delete'),
 
     # Expense Endpoints
-    path('expenses/', views.ExpenseListCreate, name='expense-list-create'),
-    path('expenses/<int:pk>/', views.ExpenseRetrieveUpdateDestroy, name='expense-detail'),
+    path('expense/', views.expense_list, name='expense_list'),
+    path('expense/add/', views.expense_add, name='expense_add'),
+    path('expense/edit/<int:pk>/', views.expense_edit, name='expense_edit'),
+    path('expense/delete/<int:pk>/', views.expense_delete, name='expense_delete'),
 
     # Income Endpoints
-    path('incomes/', views.IncomeListCreate, name='income-list-create'),
-    path('incomes/<int:pk>/', views.IncomeRetrieveUpdateDestroy, name='income-detail'),
+    path('income/', views.income_list, name='income_list'),
+    path('income/add/', views.income_add, name='income_add'),
+    path('income/edit/<int:pk>/', views.income_edit, name='income_edit'),
+    path('income/delete/<int:pk>/', views.income_delete, name='income_delete'),
 ]

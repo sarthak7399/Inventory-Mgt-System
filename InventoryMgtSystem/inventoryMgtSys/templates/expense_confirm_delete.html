@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}Counter Party{% endblock %}
+
 {% block content %}
 {% include 'navbar.html' %}
+
 <!-- Sidebar -->
       {% include 'sidebar.html' %}
-        <!-- Main content -->
+
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
-            <h2>Counter Party</h2>
-            <a class="btn btn-primary" href="{% url 'counterparty_add' %}">Add</a>
-            {% include 'counterparty_list.html' %}
+            <!-- expense_confirm_delete.html -->
+        <p>Are you sure you want to delete "{{ expense.label }}"?</p>
+        <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        </form>
+
         </div>
       </main>
+
 {% endblock %}

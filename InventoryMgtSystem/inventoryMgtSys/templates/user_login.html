@@ -1,25 +1,19 @@
 {% extends 'base.html' %}
-
-{% block title %}Login{% endblock %}
-
+{% block title %}User Login{% endblock %}
 {% block content %}
-<div class="container-signup">
-    <h3>Login</h3>
-    <form id="loginForm" method="POST" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-        <!-- <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username">
-            <i class="fas fa-user input-icon"></i>
+{% include 'navbar.html' %}
+<!-- Sidebar -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="container">
+
+            <h3>User Login</h3>
+            
+            <form id="loginForm" method="POST" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-            <i class="fas fa-lock input-icon"></i>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button> -->
-    </form>
-</div>
+      </main>
 {% endblock %}
+

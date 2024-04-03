@@ -1,0 +1,33 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Deal Type</th>
+                <th>Inventory</th>
+                <th>Gross Quantity (MT)</th>
+                <th>Net Quantity (MT)</th>
+                <th>Counterparty</th>
+                <th>Booking Date</th>
+                <th>Shipment Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for deal in deals %}
+            <tr>
+                <td>{{ deal.deal_type }}</td>
+                <td>{{ deal.inventory }}</td>
+                <td>{{ deal.gross_qty_mt }}</td>
+                <td>{{ deal.net_qty_mt }}</td>
+                <td>{{ deal.counterparty }}</td>
+                <td>{{ deal.booking_date }}</td>
+                <td>{{ deal.shipment_date }}</td>
+                <td>
+                    <a href="{% url 'deal_edit' deal.pk %}">Edit</a> | 
+                    <a href="{% url 'deal_delete' deal.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

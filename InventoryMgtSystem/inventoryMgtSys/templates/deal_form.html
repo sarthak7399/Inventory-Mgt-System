@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Add Deal{% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+<!-- Sidebar -->
+{% include 'sidebar.html' %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="container">
+        <!-- deal_form.html -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</main>
+{% endblock %}

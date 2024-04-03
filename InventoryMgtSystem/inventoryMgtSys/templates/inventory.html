@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Counter Party{% endblock %}
+{% block title %}Inventory{% endblock %}
 {% block content %}
 {% include 'navbar.html' %}
 <!-- Sidebar -->
@@ -7,9 +7,9 @@
         <!-- Main content -->
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="container">
-            <h2>Counter Party</h2>
-            <a class="btn btn-primary" href="{% url 'counterparty_add' %}">Add</a>
-            {% include 'counterparty_list.html' %}
+            <h2>Inventory</h2>
+            <a class="btn btn-primary" href="{% url 'inventory_add' %}">Add</a>
+            {% include 'inventory_list.html' %}
         </div>
-      </main>
+      </main>    
 {% endblock %}

@@ -1,0 +1,27 @@
+<!-- inventory_list.html -->
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Initial Quantity</th>
+                <th>Available Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inventory in inventories %}
+            <tr>
+                <td>{{ inventory.product }}</td>
+                <td>{{ inventory.initial_qty }}</td>
+                <td>{{ inventory.available_qty }}</td>
+                <td>
+                    <a href="{% url 'inventory_edit' inventory.pk %}">Edit</a> | 
+                    <a href="{% url 'inventory_delete' inventory.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+ </div>
+ 

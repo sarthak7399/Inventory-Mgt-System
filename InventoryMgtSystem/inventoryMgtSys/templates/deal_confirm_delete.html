@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Delete Deal{% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+<!-- Sidebar -->
+{% include 'sidebar.html' %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="container">
+        <!-- deal_confirm_delete.html -->
+        <p>Are you sure you want to delete "{{ deal.deal_type }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Yes, delete</button>
+        </form>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- expense_list.html -->
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Deal</th>
+                <th>Label</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.deal }}</td>
+                <td>{{ expense.label }}</td>
+                <td>{{ expense.description }}</td>
+                <td>{{ expense.amount }}</td>
+                <td>
+                    <a href="{% url 'expense_edit' expense.pk %}">Edit</a> | 
+                    <a href="{% url 'expense_delete' expense.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+ </div>
+ 

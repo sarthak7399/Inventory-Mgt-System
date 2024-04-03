@@ -1,58 +1,39 @@
 {% extends 'base.html' %}
-
 {% block title %}User Registration{% endblock %}
-
 {% block content %}
-<div class="animation-bg"></div>
-<div class="container-signup">
-    <h3>User Registration</h3>
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                    {{ message }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <form id="userForm" method="POST" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-        <!-- <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username">
-            <i class="fas fa-user input-icon"></i>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email">
-            <i class="fas fa-envelope input-icon"></i>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-            <i class="fas fa-lock input-icon"></i>
-        </div>
-        <div class="form-group">
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
-            <i class="fas fa-lock input-icon"></i>
-        </div>
-        <button type="submit" class="btn btn-primary">Create User</button>
-    </form> -->
-</div>
+{% include 'navbar.html' %}
+<!-- Sidebar -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="container">
 
-<script>
-    // Client-side password confirmation
-    document.getElementById("userForm").onsubmit = function() {
-        var password = document.getElementById("password").value;
-        var confirm_password = document.getElementById("confirm_password").value;
+            <h3>User Registration</h3>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form id="userForm" method="POST" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Register</button>
+            </form>
+        </div>
+      </main>
 
-        if (password != confirm_password) {
-            alert("Passwords do not match!");
-            return false;
+      <script>
+        // Client-side password confirmation
+        document.getElementById("userForm").onsubmit = function() {
+            var password = document.getElementById("password").value;
+            var confirm_password = document.getElementById("confirm_password").value;
+    
+            if (password != confirm_password) {
+                alert("Passwords do not match!");
+                return false;
+            }
         }
-    }
-</script>
+    </script>
 {% endblock %}
