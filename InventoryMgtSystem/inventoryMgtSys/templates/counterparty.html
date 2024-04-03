@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<!-- Sidebar -->
+      {% include 'sidebar.html' %}
+
+        <!-- Main content -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="container">
+            <h2>Counter Party</h2>
+            <button>Add</button>
+            <button>Edit</button>
+            <button>Delete</button>
+            {% include 'counterparty_list.html' %}
+        </div>
+      </main>
+    
+{% endblock %}

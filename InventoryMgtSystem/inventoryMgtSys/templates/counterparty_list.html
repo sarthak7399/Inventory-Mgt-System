@@ -1,0 +1,28 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact Person</th>
+                <th>Address Line 1</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for counterparty in counterparties %}
+            <tr>
+                <td>{{ counterparty.name }}</td>
+                <td>{{ counterparty.email }}</td>
+                <td>{{ counterparty.contact_person }}</td>
+                <td>{{ counterparty.address_line1 }}</td>
+                <td>{{ counterparty.city }}</td>
+                <td>{{ counterparty.state }}</td>
+                <td>{{ counterparty.active }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
