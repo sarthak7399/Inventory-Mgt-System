@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User
+from .models import *
 from django.contrib.auth import authenticate
 
 class CustomUserCreationForm(UserCreationForm):
@@ -19,9 +19,6 @@ class CustomUserCreationForm(UserCreationForm):
         # ... add more validation rules as needed
         return password2
 
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate
 
 class CustomAuthenticationForm(AuthenticationForm):
     def clean(self):
@@ -50,3 +47,9 @@ class CustomAuthenticationForm(AuthenticationForm):
 # class LoginForm(forms.Form):
 #     username = forms.CharField(label='Username', max_length=100)
 #     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+
+class CounterPartyForm(forms.ModelForm):
+    class Meta:
+        model = CounterParty
+        fields = ['name', 'email', 'contact_person', 'active', 'address_line1', 'city', 'state']

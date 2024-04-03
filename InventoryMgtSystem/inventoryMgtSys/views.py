@@ -1,7 +1,8 @@
 import os
 from pyexpat.errors import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
+from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -17,7 +18,8 @@ import base64
 def index(request):
     return render(request, 'index.html')
 
-
+def dash(request):
+    return render(request, 'dashboard.html')
 
 
 def register(request):
@@ -45,7 +47,7 @@ def login_user(request):
             if user is not None:
                 print("User is authenticated")
                 login(request, user)
-                return redirect('index')  # Redirect to homepage after login
+                return redirect('dashboard')  # Redirect to homepage after login
             else:
                 print("User authentication failed")
                 # Handle invalid credentials
@@ -67,10 +69,19 @@ def UserRetrieveUpdateDestroy(request, pk):
     return render(request, 'user_detail.html')
 
 def CounterPartyListCreate(request):
-    return render(request, 'templates/counterparty_list_create.html')
+    # Retrieve all counterparties
+    counterparties = CounterParty.objects.all()
+    data = {'counterparties': list(counterparties.values())}
+    return JsonResponse(data)
 
 def CounterPartyRetrieveUpdateDestroy(request, pk):
-    return render(request, 'templates/counterparty_detail.html')
+    try:
+        # Retrieve the specific counterparty
+        counterparty = CounterParty.objects.get(pk=pk)
+        data = {'counterparty': counterparty}
+        return JsonResponse(data)
+    except CounterParty.DoesNotExist:
+        return JsonResponse({'error': 'CounterParty not found'}, status=404)
 
 def InventoryListCreate(request):
     return render(request, 'templates/inventory_list_create.html')

@@ -7,171 +7,192 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-hWlIyL2p4im3eb6IzSk7jv89B0+80CrW4M1ougc1gTvpb/Hsww4fXb1Ck+zfy46AFuz+sqJOoKaAeojIMic3QQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+                /***** General styling *****/
         body {
-            background-color: #638CB8;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
+        color: #1F2161;
         }
 
-        /* .container-homepage {
-            max-width: 45% auto; /* Adjust maximum width to fit contents
-            margin: 20px ; Center horizontally */
-            /* padding: 20px;
-            background-color: #f7f7f4;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-        } 
- */
-
-        .container-signup {
-            max-width: 500px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #f7f7f4;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
+        p {
+        text-align: justify;
         }
 
-        h3 {
-            color: #5c8fce;
-            text-align: center;
-            margin-bottom: 20px;
+        a {
+        color: #0F773C;
         }
 
-        label {
-            font-weight: bold;
-            color: #5c8fce;
+        a:hover {
+        color: #CB831E;
+        text-decoration: none;
         }
 
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: calc(100% - 40px);
-            padding: 5px;
-            margin: 5px 0;
-            box-sizing: border-box;
-            border: 2px solid #5c8fce;
-            border-radius: 5px;
-            outline: none;
-            transition: border-color 0.3s ease;
-            font-size: 14px;
+
+
+        /***** Nav *****/
+        /* NOTE: smooth css animations */
+        @keyframes swing {
+        0% {
+            transform: rotate(0deg);
+        }
+        10% {
+            transform: rotate(10deg);
+        }
+        30% {
+            transform: rotate(0deg);
+        }
+        40% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(0deg);
+        }
+        60% {
+            transform: rotate(5deg);
+        }
+        70% {
+            transform: rotate(0deg);
+        }
+        80% {
+            transform: rotate(-5deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
         }
 
-        input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="password"]::placeholder {
-            color: #d3d3d3;
+        .htmlBody #sidebarWrapper,
+        #sidebarWrapper .sidebar-brand > a,
+        .htmlBody .page-content,
+        #sidebarWrapper .navMenu ul li a,
+        #show-sidebar,
+        #close-sidebar {
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        transition: all 0.3s ease;
         }
 
-        .input-icon {
-            position: absolute;
-            top: 50%;
-            right: 5px;
-            transform: translateY(-50%);
-            color: #5c8fce;
-            font-size: 14px;
+
+
+        /***** When sidebar is toggled *****/
+        .htmlBody.toggled #sidebarWrapper {
+        left: 0px;
         }
 
-        .btn-primary {
-            background-color: #FFA500;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-            font-size: 14px;
-            margin-top: 10px;
+        @media screen and (min-width: 768px) {
+        .htmlBody.toggled .page-content {
+            padding-left: 300px;
+        }
         }
 
-        .btn-primary:hover {
-            background-color: #FF8C00;
+
+
+        /***** Open/Close Sidebar *****/
+        #show-sidebar {
+        position: fixed;
+        left: 0;
+        top: 1.3rem;
+        border-radius: 0 4px 4px 0px;
+        width: 2.5rem;
+        transition-delay: 0.3s;
+        z-index: 2;
+        background-color: #102A83;
+        color: #FEFDFB;
+        font-size: 1.3em;
+        padding-bottom: 0;
         }
 
-        .animation-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
-            animation: moveBackground 4s linear infinite;
-            z-index: 0;
+        #hamburger {
+        margin-bottom: 0;
         }
 
-        @keyframes moveBackground {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 100% 0;
-            }
+        .htmlBody.toggled #show-sidebar {
+        left: -40px;
         }
 
-        .content {
-            padding: 20px;
+        .htmlBody.toggled #close-sidebar {
+        color: #1F2161;
         }
 
-        .hero-section,
-        .features-section,
-        .cta-section {
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
+        .htmlBody.toggled #close-sidebar:hover {
+        color: #0F773C;
         }
 
-        .hero-section {
-            background-color: #f7f7f4;
+
+
+        /***** Sidebar: general *****/
+        #sidebarWrapper {
+        width: 18.8rem;
+        height: 100%;
+        max-height: 100%;
+        position: fixed;
+        top: 0;
+        left: -300px;
+        z-index: 2;
+        overflow-y: auto;
+        background: #F2F2F2;
         }
 
-        .features-section,
-        .cta-section {
-            background-color: #f7f7f4;
-            max-width: 45%;
-            width: 100%;
-            height: 50vh; /* Half of the viewport height */
-            display: inline-block;
-            vertical-align: top;
+        #sidebarWrapper ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
         }
 
-        .cta-section {
-            margin-top: 20px;
+
+
+        /***** Sidebar brand & logo *****/
+        #sidebarWrapper .sidebar-brand {
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
         }
 
-        .features-section .content,
-        .cta-section .content {
-            max-width: 100%;
-            height: 100%;
+        #sidebarWrapper .sidebar-brand > a {
+        text-transform: uppercase;
+        font-weight: bold;
+        flex-grow: 1;
         }
 
-        .section-title {
-            color: #5c8fce;
+        #sidebarWrapper .sidebar-brand #close-sidebar {
+        cursor: pointer;
+        font-size: 1.5rem;
         }
 
-        .feature-item {
-            margin-bottom: 20px;
+        .sidebar-logo {
+        margin-top: 0;
         }
 
-        .btn-primary {
-            background-color: #FFA500;
-            color: white;
+
+
+        /***** Sidebar nav links *****/
+        .navMenu {
+        padding-bottom: 10px;
         }
 
-        .btn-primary:hover {
-            background-color: #FF8C00;
+        .navMenu ul li a {
+        padding: 8px 30px 8px 20px;
         }
 
+        .sidebar-brand > a, .navMenu ul li a {
+        color: #1F2161;
+        }
+
+        .navMenu ul li:hover > a,
+        .sidebar-brand > a:hover {
+        color: #0F773C;
+        }
     </style>
 </head>
 <body>
+    
     {% block content %}
+    
     {% endblock %}
 
-    <script>
-        // Add common scripts here
-    </script>
+    <!-- Bootstrap JS scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
