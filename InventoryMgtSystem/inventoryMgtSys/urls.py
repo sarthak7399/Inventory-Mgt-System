@@ -14,8 +14,10 @@ urlpatterns = [
     path('users/<int:pk>/', views.UserRetrieveUpdateDestroy, name='user-detail'),
 
     # CounterParty Endpoints
-    path('counterparties/', views.CounterPartyListCreate, name='counterparty-list-create'),
-    path('counterparties/<int:pk>/', views.CounterPartyRetrieveUpdateDestroy, name='counterparty-detail'),
+    path('counterparty/', views.counterparty_list, name='counterparty_list'),
+    path('counterparty/add/', views.counterparty_add, name='counterparty_add'),
+    path('counterparty/edit/<int:pk>/', views.counterparty_edit, name='counterparty_edit'),
+    path('counterparty/delete/<int:pk>/', views.counterparty_delete, name='counterparty_delete'),
 
     # Inventory Endpoints
     path('inventories/', views.InventoryListCreate, name='inventory-list-create'),

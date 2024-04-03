@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<!-- Sidebar -->
+      {% include 'sidebar.html' %}
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="container">
+            <!-- counterparty_confirm_delete.html -->
+        <p>Are you sure you want to delete "{{ counterparty.name }}"?</p>
+        <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        </form>
+
+        </div>
+      </main>
+
+{% endblock %}

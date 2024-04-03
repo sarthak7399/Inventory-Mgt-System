@@ -1,7 +1,7 @@
 import os
 from pyexpat.errors import messages
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
 from .forms import *
 from django.contrib.auth import authenticate, login, logout
@@ -68,20 +68,37 @@ def logout_user(request):
 def UserRetrieveUpdateDestroy(request, pk):
     return render(request, 'user_detail.html')
 
-def CounterPartyListCreate(request):
-    # Retrieve all counterparties
-    counterparties = CounterParty.objects.all()
-    data = {'counterparties': list(counterparties.values())}
-    return JsonResponse(data)
+def counterparty_list(request):
+   counterparties = CounterParty.objects.all()
+   return render(request, 'counterparty.html', {'counterparties': counterparties})
 
-def CounterPartyRetrieveUpdateDestroy(request, pk):
-    try:
-        # Retrieve the specific counterparty
-        counterparty = CounterParty.objects.get(pk=pk)
-        data = {'counterparty': counterparty}
-        return JsonResponse(data)
-    except CounterParty.DoesNotExist:
-        return JsonResponse({'error': 'CounterParty not found'}, status=404)
+def counterparty_add(request):
+   if request.method == 'POST':
+       form = CounterPartyForm(request.POST)
+       if form.is_valid():
+           form.save()
+           return redirect('counterparty_list')
+   else:
+       form = CounterPartyForm()
+   return render(request, 'counterparty_form.html', {'form': form})
+
+def counterparty_edit(request, pk):
+   counterparty = get_object_or_404(CounterParty, pk=pk)
+   if request.method == 'POST':
+       form = CounterPartyForm(request.POST, instance=counterparty)
+       if form.is_valid():
+           form.save()
+           return redirect('counterparty_list')
+   else:
+       form = CounterPartyForm(instance=counterparty)
+   return render(request, 'counterparty_form.html', {'form': form})
+
+def counterparty_delete(request, pk):
+   counterparty = get_object_or_404(CounterParty, pk=pk)
+   if request.method == 'POST':
+       counterparty.delete()
+       return redirect('counterparty_list')
+   return render(request, 'counterparty_confirm_delete.html', {'counterparty': counterparty})
 
 def InventoryListCreate(request):
     return render(request, 'templates/inventory_list_create.html')

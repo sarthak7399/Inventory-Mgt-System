@@ -52,4 +52,4 @@ class CustomAuthenticationForm(AuthenticationForm):
 class CounterPartyForm(forms.ModelForm):
     class Meta:
         model = CounterParty
-        fields = ['name', 'email', 'contact_person', 'active', 'address_line1', 'city', 'state']
+        fields = '__all__'

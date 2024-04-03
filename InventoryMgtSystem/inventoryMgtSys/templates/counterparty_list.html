@@ -1,3 +1,5 @@
+
+
 <div class="container">
     <table class="table table-striped">
         <thead>
@@ -9,6 +11,7 @@
                 <th>City</th>
                 <th>State</th>
                 <th>Active</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +24,12 @@
                 <td>{{ counterparty.city }}</td>
                 <td>{{ counterparty.state }}</td>
                 <td>{{ counterparty.active }}</td>
+                <td>
+                    <a href="{% url 'counterparty_edit' counterparty.pk %}">Edit</a> | 
+                    <a href="{% url 'counterparty_delete' counterparty.pk %}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
+ </div>
