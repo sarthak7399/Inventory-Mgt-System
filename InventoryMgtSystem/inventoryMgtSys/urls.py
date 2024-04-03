@@ -7,9 +7,10 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     # User Endpoints
-    path('users/', views.createUser, name='create-user'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_user, name='login'),
+    path('logout/', views.logout_user, name='logout'),
     path('users/<int:pk>/', views.UserRetrieveUpdateDestroy, name='user-detail'),
-    path('login/', views.userLogin, name='login'),
 
     # CounterParty Endpoints
     path('counterparties/', views.CounterPartyListCreate, name='counterparty-list-create'),

@@ -1,44 +1,70 @@
+import os
 from pyexpat.errors import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import *
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.forms import AuthenticationForm
+from passlib.hash import pbkdf2_sha256
+from django.contrib import messages
+from hashlib import pbkdf2_hmac
+import base64
 
 # Create your views here.
 
 def index(request):
     return render(request, 'index.html')
 
-def createUser(request):
-    form = UserForm()
 
+
+
+def register(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('/')  # Redirect to homepage after creating user
+            user = form.save()
+            return redirect('login')  # Redirect to login page after registration
+        else:
+            # Handle invalid form data with error messages
+            for error in form.errors:
+                messages.error(request, error)  # Add error messages for popups
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'user_registration.html', {'form': form})
 
-    context = {'form': form}
-    return render(request, 'create_user.html', context)
-
-def UserRetrieveUpdateDestroy(request, pk):
-    return render(request, 'user_detail.html')
-
-def userLogin(request):
+def login_user(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = CustomAuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
+
+            user = authenticate(username=username, password=password)
             if user is not None:
+                print("User is authenticated")
                 login(request, user)
-                return redirect('/')
+                return redirect('index')  # Redirect to homepage after login
             else:
-                HttpResponse('Invalid username or password')  # Display error message
+                print("User authentication failed")
+                # Handle invalid credentials
+                messages.error(request, 'Invalid username or password')
     else:
-        form = LoginForm()
+        form = CustomAuthenticationForm()
     return render(request, 'user_login.html', {'form': form})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')  # Redirect to login page after logout
+
+
+
+
+
+def UserRetrieveUpdateDestroy(request, pk):
+    return render(request, 'user_detail.html')
 
 def CounterPartyListCreate(request):
     return render(request, 'templates/counterparty_list_create.html')

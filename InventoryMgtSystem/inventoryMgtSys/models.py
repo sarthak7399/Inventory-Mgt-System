@@ -1,17 +1,87 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, AbstractUser, PermissionsMixin
 
 # Create your models here.
 
-class User(models.Model):
-    username = models.CharField(max_length=100)
-    email = models.EmailField()
-    password = models.CharField(max_length=100)
-    admin = models.BooleanField(default=False)
+# class CustomUserManager(BaseUserManager):
+#     def create_user(self, username, email, password=None):
+#         if not email:
+#             raise ValueError('Users must have an email address')
+
+#         user = self.model(
+#             email=self.normalize_email(email),
+#             username=username,
+#         )
+
+#         user.set_password(password)
+#         user.save(using=self._db)
+#         return user
+
+#     def create_superuser(self, username, email, password=None):
+#         user = self.create_user(
+#             email=email,
+#             username=username,
+#             password=password,
+#         )
+#         user.admin = True
+#         user.is_staff = True
+#         user.is_superuser = True  # Set user as superuser
+#         user.save(using=self._db)
+#         return user
+
+
+
+
+class UserManager(BaseUserManager):
+    def create_user(self, username, email, password=None):
+        if not username:
+            raise ValueError('Users must have a username')
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(username=username, email=email)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, email, password):
+        user = self.create_user(username=username, email=email, password=password)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+class User(AbstractBaseUser):
+    username = models.CharField(max_length=100, unique=True, db_index=True)  # Add db_index for faster case-insensitive lookups
+    email = models.EmailField(unique=True)
+    admin = models.BooleanField(default=False)  # Consider using is_staff instead
     active = models.BooleanField(default=True)
+
+    USERNAME_FIELD = 'username'  # Required for custom user models
+    REQUIRED_FIELDS = ['email']  # Required fields for creating a user
+
+    objects = UserManager()
 
     def __str__(self):
         return self.username
+    
 
+
+# class User():
+#     username = models.CharField(max_length=100, unique=True, db_index=True)  # Add db_index for faster case-insensitive lookups
+#     email = models.EmailField(unique=True)
+#     admin = models.BooleanField(default=False)  # Consider using is_staff instead
+#     active = models.BooleanField(default=True)
+
+#     USERNAME_FIELD = 'username'  # Required for custom user models
+#     REQUIRED_FIELDS = ['email']  # Required fields for creating a user
+
+#     objects = UserManager()
+
+
+
+
+    
 class CounterParty(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
