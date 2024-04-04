@@ -7,9 +7,9 @@
       {% include 'sidebar.html' %}
 
         <!-- Main content -->
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
         <div class="container">
-            <h2>Expense</h2>
+            <h2 class="mb-4">Expense</h2>
             <a class="btn btn-primary" href="{% url 'expense_add' %}">Add</a>
             {% include 'expense_list.html' %}
         </div>

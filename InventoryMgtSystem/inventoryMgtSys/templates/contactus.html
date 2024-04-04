@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mt-4 mb-4">Contact Us</h2>
+            <div class="text-center">
+                <div class="mb-4">
+                    <p><i class="fas fa-phone-alt mr-3"></i> Phone:</p>
+                    <p class="text-primary">+91 1234567890</p>
+                </div>
+                <div class="mb-4">
+                    <p><i class="fas fa-envelope mr-3"></i> Email:</p>
+                    <p class="text-primary">sarthak753@gmail.com</p>
+                </div>
+                <div class="mb-4">
+                    <p><i class="fas fa-map-marker-alt mr-3"></i> Address:</p>
+                    <p class="text-primary">123 Street, City, India</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

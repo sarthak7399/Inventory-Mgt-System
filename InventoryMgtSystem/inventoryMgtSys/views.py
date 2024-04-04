@@ -135,7 +135,8 @@ def deal_add(request):
     if request.method == 'POST':
         form = DealForm(request.POST)
         if form.is_valid():
-            form.save()
+            deal = form.save()
+            deal.handle_deal()  # Call handle_deal method
             return redirect('deal_list')
     else:
         form = DealForm()
@@ -226,3 +227,10 @@ def income_delete(request, pk):
        income.delete()
        return redirect('income_list')
    return render(request, 'income_confirm_delete.html', {'income': income})
+
+
+def contactus(request):
+    return render(request, 'contactus.html')
+
+def features(request):
+    return render(request, 'features.html')

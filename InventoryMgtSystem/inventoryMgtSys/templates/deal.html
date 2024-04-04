@@ -5,9 +5,9 @@
 <!-- Sidebar -->
       {% include 'sidebar.html' %}
         <!-- Main content -->
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
         <div class="container">
-            <h2>Deals</h2>
+            <h2 class="mb-4">Deals</h2>
             <a class="btn btn-primary" href="{% url 'deal_add' %}">Add</a>
             {% include 'deal_list.html' %}
         </div>

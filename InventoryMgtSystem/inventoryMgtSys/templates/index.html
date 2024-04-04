@@ -1,45 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}Inventory Management System{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
             <section class="hero-section">
-                <div class="content">
-                    <h1 class="hero-title">Efficient Inventory Management</h1>
-                    <p class="hero-description">Track, manage, and optimize your inventory with ease.</p>
-                    <a href="#features" class="btn btn-primary btn-lg">Explore Features</a>
+                <div class="content text-center">
+                    <h1 class="hero-title text-primary">INVENTORY MANAGEMENT SYSTEM</h1> <!-- Highlighted text -->
+                    <p class="hero-description text-secondary">Track, manage, and optimize your inventory with ease.</p> <!-- Highlighted text -->
+                    <a href="{% url 'features' %}" class="btn btn-primary btn-lg">Explore Features</a>
                 </div>
             </section>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6"> <!-- Removed ml-md-5 class -->
             <div class="row">
                 <div class="col-md-12">
                     <section class="features-section">
                         <div class="content">
-                            <h2 class="section-title">Key Features</h2>
+                            <h2 class="section-title text-center text-success">Key Features</h2> <!-- Highlighted text -->
                             <div class="feature-item">
-                                <i class="fas fa-box-open fa-3x"></i>
-                                <h3 class="feature-title">Inventory Tracking</h3>
+                                <i class="fas fa-box-open fa-3x text-info"></i> <!-- Colorful icon -->
+                                <h3 class="feature-title text-info">Inventory Tracking</h3> <!-- Highlighted text and colorful -->
                                 <p class="feature-description">Effortlessly monitor your inventory levels in real-time.</p>
                             </div>
                             <div class="feature-item">
-                                <i class="fas fa-chart-line fa-3x"></i>
-                                <h3 class="feature-title">Analytics</h3>
+                                <i class="fas fa-chart-line fa-3x text-warning"></i> <!-- Colorful icon -->
+                                <h3 class="feature-title text-warning">Analytics</h3> <!-- Highlighted text and colorful -->
                                 <p class="feature-description">Gain insights into sales trends and product performance.</p>
                             </div>
                             <div class="feature-item">
-                                <i class="fas fa-cogs fa-3x"></i>
-                                <h3 class="feature-title">Customization</h3>
+                                <i class="fas fa-cogs fa-3x text-danger"></i> <!-- Colorful icon -->
+                                <h3 class="feature-title text-danger">Customization</h3> <!-- Highlighted text and colorful -->
                                 <p class="feature-description">Tailor the system to fit your unique business needs.</p>
                             </div>
                         </div>
                     </section>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 mt-5">
                     <section class="cta-section">
                         <div class="content">
-                            <h2 class="section-title">Ready to get started?</h2>
+                            <h2 class="section-title text-center text-primary">Ready to get started?</h2> <!-- Highlighted text -->
                             <p class="section-description">Sign up now for a free trial and experience the power of our inventory management system.</p>
                             <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Sign Up</a>
                         </div>

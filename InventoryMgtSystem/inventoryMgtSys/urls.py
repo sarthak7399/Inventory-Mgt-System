@@ -42,4 +42,7 @@ urlpatterns = [
     path('income/add/', views.income_add, name='income_add'),
     path('income/edit/<int:pk>/', views.income_edit, name='income_edit'),
     path('income/delete/<int:pk>/', views.income_delete, name='income_delete'),
+
+    path('contactus', views.contactus, name='contactus'),
+    path('features', views.features, name='features'),
 ]

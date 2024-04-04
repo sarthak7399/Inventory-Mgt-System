@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Abstra
 # The user model is created by inheriting from AbstractUser, which is provided by Django. It has all the necessary fields and methods for authentication.
 class User(AbstractUser):
     username = models.CharField(max_length=100, unique=True, db_index=True)  # Add db_index for faster case-insensitive lookups
+    full_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     admin = models.BooleanField(default=False)  # Consider using is_staff instead
     active = models.BooleanField(default=True)
@@ -15,7 +16,7 @@ class User(AbstractUser):
 
     # objects = UserManager()
     def __str__(self):
-        return self.username
+        return self.full_name
     
 
 class CounterParty(models.Model):
@@ -52,9 +53,26 @@ class Deal(models.Model):
     counterparty = models.ForeignKey(CounterParty, on_delete=models.CASCADE)
     booking_date = models.DateTimeField()
     shipment_date = models.DateTimeField()
+    amount = models.FloatField()
 
     def __str__(self):
-        return self.deal_type
+        return f"{self.deal_type} of {self.inventory.product} with {self.counterparty}"
+    
+    def handle_deal(self):
+        if self.deal_type == 'Sale':
+            # Handle Sale Deal
+            self.inventory.available_qty -= self.net_qty_mt
+            self.inventory.save()
+            counterparty_name = self.counterparty.name
+            product_name = self.inventory.product
+            Income.objects.create(deal=self, label='Sale Income', description=f'Income from selling of {product_name} with {counterparty_name}', amount=self.amount)
+        elif self.deal_type == 'Purchase':
+            # Handle Purchase Deal
+            self.inventory.available_qty += self.net_qty_mt
+            self.inventory.save()
+            counterparty_name = self.counterparty.name
+            product_name = self.inventory.product
+            Expense.objects.create(deal=self, label='Purchase Expense', description=f'Expense from purchase of {product_name} with {counterparty_name}', amount=self.amount)
 
 
 class Expense(models.Model):
@@ -64,7 +82,7 @@ class Expense(models.Model):
     amount = models.FloatField()
 
     def __str__(self):
-        return self.label
+        return self.description
     
 
 class Income(models.Model):
@@ -74,4 +92,4 @@ class Income(models.Model):
     amount = models.FloatField()
 
     def __str__(self):
-        return self.label
+        return self.description
