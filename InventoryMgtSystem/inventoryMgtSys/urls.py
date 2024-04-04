@@ -5,13 +5,11 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('dashboard/', views.dash, name='dashboard'),
 
     # User Endpoints
     path('register/', views.register, name='register'),
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),
-    path('users/<int:pk>/', views.UserRetrieveUpdateDestroy, name='user-detail'),
 
     # CounterParty Endpoints
     path('counterparty/', views.counterparty_list, name='counterparty_list'),

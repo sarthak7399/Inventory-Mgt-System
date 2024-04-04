@@ -40,7 +40,7 @@ def login_user(request):
             if user is not None:
                 print("User is authenticated")
                 login(request, user)
-                return redirect('dashboard')  # Redirect to homepage after login
+                return redirect('counterparty_list')  # Redirect to Counterparties listing
             else:
                 print("User authentication failed")
                 # Handle invalid credentials
@@ -54,10 +54,6 @@ def logout_user(request):
     logout(request)
     return redirect('login')  # Redirect to login page after logout
 
-
-
-def UserRetrieveUpdateDestroy(request, pk):
-    return render(request, 'user_detail.html')
 
 def counterparty_list(request):
    counterparties = CounterParty.objects.all()

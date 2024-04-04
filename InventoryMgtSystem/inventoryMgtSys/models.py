@@ -48,8 +48,8 @@ class Deal(models.Model):
     ]
     deal_type = models.CharField(max_length=20, choices=DEAL_TYPES)
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
-    gross_qty_mt = models.FloatField()
-    net_qty_mt = models.FloatField()
+    gross_qty = models.FloatField()
+    net_qty = models.FloatField()
     counterparty = models.ForeignKey(CounterParty, on_delete=models.CASCADE)
     booking_date = models.DateTimeField()
     shipment_date = models.DateTimeField()
@@ -59,21 +59,22 @@ class Deal(models.Model):
         return f"{self.deal_type} of {self.inventory.product} with {self.counterparty}"
     
     def handle_deal(self):
-        if self.deal_type == 'Sale':
+        if self.deal_type == 'Sale' or self.deal_type == 'sell':
             # Handle Sale Deal
-            self.inventory.available_qty -= self.net_qty_mt
-            self.inventory.save()
+            if self.net_qty > self.inventory.available_qty:
+                raise ValueError("Insufficient inventory available for sale")
+            self.inventory.available_qty -= self.net_qty
+            self.inventory.save()  # Save the changes to update the available quantity
             counterparty_name = self.counterparty.name
             product_name = self.inventory.product
             Income.objects.create(deal=self, label='Sale Income', description=f'Income from selling of {product_name} with {counterparty_name}', amount=self.amount)
-        elif self.deal_type == 'Purchase':
+        elif self.deal_type == 'Purchase' or self.deal_type == 'purchase':
             # Handle Purchase Deal
-            self.inventory.available_qty += self.net_qty_mt
-            self.inventory.save()
+            self.inventory.available_qty += self.net_qty
+            self.inventory.save()  # Save the changes to update the available quantity
             counterparty_name = self.counterparty.name
             product_name = self.inventory.product
             Expense.objects.create(deal=self, label='Purchase Expense', description=f'Expense from purchase of {product_name} with {counterparty_name}', amount=self.amount)
-
 
 class Expense(models.Model):
     deal = models.ForeignKey(Deal, on_delete=models.CASCADE)
