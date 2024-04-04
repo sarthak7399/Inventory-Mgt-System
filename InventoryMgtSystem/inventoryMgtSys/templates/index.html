@@ -1,26 +1,38 @@
 {% extends 'base.html' %}
-{% block title %}Inventory Management System{% endblock %}
+{% load static %}
+
+{% block title %}
+    Inventory Management System
+{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6">
-            <section class="hero-section">
-                <div class="content text-center">
-                    <h1 class="hero-title text-primary">INVENTORY MANAGEMENT SYSTEM</h1> <!-- Highlighted text -->
-                    <p class="hero-description text-secondary">Track, manage, and optimize your inventory with ease.</p> <!-- Highlighted text -->
-                    <a href="{% url 'features' %}" class="btn btn-primary btn-lg">Explore Features</a>
-                </div>
-            </section>
-        </div>
-        <div class="col-md-6"> <!-- Removed ml-md-5 class -->
-            <div class="row">
-                <div class="col-md-12">
+<!-- Background image -->
+<!-- Background image -->
+<div class="bg-image">
+    <!-- Add your background image here -->
+    <div class="container-fluid bg-transparent text-dark py-4 content-overlay">
+        <div class="row justify-content-center">
+            <div class="col-md-10"> <!-- Adjust the column width based on your layout -->
+                <section class="mw-90 rounded-sm bg-dark hero-section">
+                    <div class="w-100 p-3 container-fluid text-center">
+                        <h1 class="hero-title text-danger">INVENTORY MANAGEMENT SYSTEM</h1>
+                        
+                        <div class="container-fluid justify-content-center"> 
+                            <p class="hero-description text-light text-center justify-content-center">Track, manage, and optimize your inventory with ease.</p>
+                        </div>
+                        <a href="{% url 'features' %}" class="row mx-md-n5 btn btn-secondary btn-sm">Explore Features</a>
+                    </div>
+                </section>
+            </div>
+
+            <div class="row justify-content-center bg-info mt-5">
+                <div class="col-md-10 mb-4 mr-20"> <!-- Add mb-4 class for bottom margin -->
                     <section class="features-section">
                         <div class="content">
-                            <h2 class="section-title text-center text-success">Key Features</h2> <!-- Highlighted text -->
+                            <h2 class="section-title text-center text-dark mt-3">Key Features</h2> <!-- Highlighted text -->
                             <div class="feature-item">
                                 <i class="fas fa-box-open fa-3x text-info"></i> <!-- Colorful icon -->
-                                <h3 class="feature-title text-info">Inventory Tracking</h3> <!-- Highlighted text and colorful -->
+                                <h3 class="feature-title text-danger">Inventory Tracking</h3> <!-- Highlighted text and colorful -->
                                 <p class="feature-description">Effortlessly monitor your inventory levels in real-time.</p>
                             </div>
                             <div class="feature-item">
@@ -36,17 +48,46 @@
                         </div>
                     </section>
                 </div>
-                <div class="col-md-12 mt-5">
+            </div>
+            
+
+            <div class="bg-info mt-5 ">
+                <div class="col-md-20 mb-4"> <!-- Add mb-4 class for bottom margin -->
                     <section class="cta-section">
                         <div class="content">
-                            <h2 class="section-title text-center text-primary">Ready to get started?</h2> <!-- Highlighted text -->
+                            <h2 class="section-title text-center text-dark mt-3">Ready to get started?</h2> 
+                            <br>
+                            <br>
+                            <br>
+
+                            <p class="section-description text-center features-section">Sign up now for a free trial and experience the power <br>of our inventory management system.</p>
+                            <br>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <a href="{% url 'register' %}" class="btn btn-primary btn-lg mr-5">Sign Up</a>
+                                <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+                            </div>
+                            
+                            
+                        </div>
+                    </section>
+                </div>
+            </div>
+            </div>
+            <!-- CTA Section -->
+            <!-- <div class="row justify-content-center bg-secondary">
+                <div class="col-md-10">
+                    <section class="cta-section">
+                        <div class="content">
+                            <h2 class="section-title text-center text-primary">Ready to get started?</h2> 
                             <p class="section-description">Sign up now for a free trial and experience the power of our inventory management system.</p>
                             <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Sign Up</a>
                         </div>
                     </section>
                 </div>
-            </div>
-        </div>
+            </div> -->
     </div>
 </div>
+    <!-- First full-width row -->
+    <!-- Second full-width row -->
 {% endblock %}

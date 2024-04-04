@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +47,19 @@
             z-index: -1;
             }
 
+        .bg-image {
+            background-image: url("{% static 'images/homepage.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            z-index: -1;
+        }
 
+        .content-overlay {
+            background-color: transparent;
+            width: 100%;
+        }
 
 
         /***** Nav *****/
