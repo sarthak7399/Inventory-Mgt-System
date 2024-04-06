@@ -26,8 +26,15 @@ SECRET_KEY = 'django-insecure-h4_7rb^foj9f$grll@u2+*x3=l9jz6p9ywsh(t#^5c)uawx0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://8000-sarthak7399-inventorymg-0r9ohvrosy9.ws-us110.gitpod.io/',
+    '.gitpod.io',  # Allow all subdomains of gitpod.io
+    '127.0.0.1',
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://https://8000-sarthak7399-inventorymg-0r9ohvrosy9.ws-us110.gitpod.io/',
+]
 
 # Application definition
 
